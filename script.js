@@ -14,7 +14,7 @@ const CONFIG = {
 
   // Ranking del juego: URL de la "Aplicación web" de Google Apps Script (ver ranking-apps-script.gs).
   // Mientras esté vacío, el ranking solo guarda las partidas de este dispositivo.
-  rankingUrl: "",
+  rankingUrl: "https://script.google.com/macros/s/AKfycbx1hkZ_y6tAmG45p9dxbr-XNX8QmaANVbLxMIf_EQU11lsWDFGnNXhQzkmD8DRWIjz9/exec",
 
   // Google Form al que se envían las respuestas (se guardan en vuestra hoja de Google)
   formAction: "https://docs.google.com/forms/d/e/1FAIpQLSdQKm17lzDf4Cireh675uH0OTEeBuyw3bkKtCmTJWNp9Yxqmg/formResponse",
@@ -234,8 +234,16 @@ const Ranking = (() => {
   const cleanName = (s) => s.replace(/\s+/g, " ").trim().slice(0, 20);
   const getName = () => cleanName(player.value);
 
-  function render(top, me) {
-    list.replaceChildren(...top.map((row) => {
+  const countEl = document.getElementById("ranking-count");
+  const moreBtn = document.getElementById("ranking-more");
+  const VISIBLE = 10;
+  let expanded = false;
+  let last = { rows: [], me: "" };
+
+  function render(rows, me) {
+    last = { rows, me };
+    const shown = expanded ? rows : rows.slice(0, VISIBLE);
+    list.replaceChildren(...shown.map((row) => {
       const li = document.createElement("li");
       const n = document.createElement("span"); n.className = "name"; n.textContent = row.name;
       const p = document.createElement("span"); p.className = "pts"; p.textContent = `${row.score} pts`;
@@ -243,8 +251,13 @@ const Ranking = (() => {
       li.append(n, p);
       return li;
     }));
-    if (!top.length) statusEl.textContent = "Aún no juega nadie. Estrénalo tú.";
+    countEl.textContent = rows.length === 1 ? "1 persona ha jugado." : rows.length ? `${rows.length} personas han jugado.` : "";
+    moreBtn.hidden = rows.length <= VISIBLE;
+    moreBtn.textContent = expanded ? "Ver solo el top 10" : `Ver a todos (${rows.length})`;
+    moreBtn.setAttribute("aria-expanded", String(expanded));
+    if (!rows.length) statusEl.textContent = "Aún no juega nadie. Estrénalo tú.";
   }
+  moreBtn.addEventListener("click", () => { expanded = !expanded; render(last.rows, last.me); });
 
   // Ranking guardado en este dispositivo (cuando no hay rankingUrl)
   function localTop() { try { return JSON.parse(localStorage.getItem(LOCAL_KEY)) || []; } catch { return []; } }
@@ -254,8 +267,8 @@ const Ranking = (() => {
     if (i === -1) all.push({ name, score });
     else if (score > all[i].score) all[i].score = score;
     all.sort((a, b) => b.score - a.score);
-    localStorage.setItem(LOCAL_KEY, JSON.stringify(all.slice(0, 10)));
-    return all.slice(0, 10);
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(all.slice(0, 200)));
+    return all.slice(0, 200);
   }
 
   async function load() {

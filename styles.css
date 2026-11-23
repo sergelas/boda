@@ -308,6 +308,9 @@ input[type="text"]:focus { outline: 3px solid var(--gold); outline-offset: 1px; 
 .ranking__list .pts { font-weight: 700; font-variant-numeric: tabular-nums; }
 .ranking__list li.is-me { border-color: var(--sage-dark); background: #eef1ea; }
 @media (max-width: 760px) { .ranking__list { grid-template-columns: 1fr; } }
+.ranking__count { color: var(--muted); margin: -.4rem 0 1rem; }
+.ranking__count:empty { display: none; }
+.ranking__more { margin-top: 14px; }
 
 /* Regalo */
 .gift { background: var(--white); text-align: center; }

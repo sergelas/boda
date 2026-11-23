@@ -15,7 +15,7 @@
 
 const SHEET_NAME = "Ranking";
 const MAX_SCORE = 400;   // en 30 segundos no se puede sacar más; evita trampas obvias
-const TOP = 10;
+const TOP = 300;         // la web enseña los 10 primeros y un botón "Ver a todos"
 
 function sheet_() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
