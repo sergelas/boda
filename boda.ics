@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Guadalupe y Sergio//Boda//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:boda-guadalupe-sergio-20271204
+DTSTAMP:20261123T000000Z
+DTSTART:20271204T120000Z
+DTEND:20271205T000000Z
+SUMMARY:Boda de Guadalupe y Sergio
+LOCATION:Finca La Fuente de los Ángeles\, Cam. Los Ángeles s/n\, 47620 Villanubla\, Valladolid
+DESCRIPTION:Bienvenida 13:00 · Ceremonia 13:30 · Cóctel 14:30 · Banquete 16:00 · Fiesta 21:00
+URL:https://maps.app.goo.gl/U5tds81izYyUoJv47
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Queda una semana para la boda de Guadalupe y Sergio
+END:VALARM
+END:VEVENT
+END:VCALENDAR
