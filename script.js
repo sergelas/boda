@@ -323,7 +323,7 @@ const Ranking = (() => {
   const ITEMS = [
     { e: "💐", pts: 1, w: 62 },
     { e: "💍", pts: 5, w: 10 },
-    { e: "🧾", pts: -3, w: 28 },
+    { e: "📜", pts: -3, w: 28 }, // papeles del divorcio
   ];
   const totalW = ITEMS.reduce((a, b) => a + b.w, 0);
   const pick = () => { let r = Math.random() * totalW; return ITEMS.find((it) => (r -= it.w) < 0); };
@@ -400,10 +400,11 @@ const Ranking = (() => {
   }
 
   function verdict(s) {
-    if (s >= 60) return "Nivel: te casas tú la próxima.";
-    if (s >= 35) return "Nivel: el ramo es tuyo, avisa a tu pareja.";
-    if (s >= 15) return "Nivel: buena mano, poca suerte.";
-    return "Nivel: tú mejor a la barra.";
+    if (s >= 60) return "Pareja nivel dios. Deberíais estar vosotros en el altar.";
+    if (s >= 35) return "Buena pareja. Bodas de oro a la vista.";
+    if (s >= 15) return "Pareja con terapia. Con un poco de diálogo, llegáis.";
+    if (s > 0) return "Pareja nefasta. Ya tenéis cita con el abogado.";
+    return "Pareja nefasta. Los papeles del divorcio ya están firmados.";
   }
 
   async function finish() {

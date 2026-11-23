@@ -183,7 +183,19 @@ main > section { padding: clamp(72px, 10vw, 128px) 0; }
 .photos__grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: clamp(14px, 2vw, 24px); align-items: center; }
 .photos__grid .zoom { aspect-ratio: 3 / 4; }
 .photos__quote { text-align: center; }
-.photos__quote p { font: 500 clamp(1.8rem, 3.4vw, 2.8rem)/1.2 var(--serif); margin: 0; }
+.photos__quote p { margin: 0; }
+.photos__kicker { font: italic 500 clamp(1.6rem, 2.8vw, 2.2rem)/1.2 var(--serif); color: var(--gold); }
+.photos__date { font: 500 clamp(2.6rem, 5.2vw, 4.4rem)/1.1 var(--serif); white-space: nowrap; font-variant-numeric: lining-nums; }
+
+.levels { margin: 0 0 1rem; }
+.levels summary { cursor: pointer; font-weight: 700; color: var(--sage-dark); min-height: 44px; display: flex; align-items: center; gap: .5em; list-style: none; }
+.levels summary::-webkit-details-marker { display: none; }
+.levels summary::before { content: "+"; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--sage); font-size: 1rem; line-height: 1; transition: transform .2s var(--ease); }
+.levels[open] summary::before { content: "−"; }
+.levels summary:hover { color: var(--gold-dark); }
+.levels ul { list-style: none; padding: 0; margin: .3rem 0 0; display: grid; gap: 4px; }
+.levels li { display: flex; gap: .8rem; }
+.levels li strong { width: 4.2rem; font-variant-numeric: tabular-nums; color: var(--muted); }
 @media (max-width: 760px) {
   .photos__grid { grid-template-columns: 1fr 1fr; }
   .photos__quote { grid-column: 1 / -1; order: -1; padding-bottom: 8px; }
